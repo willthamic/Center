@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Defuse</title>
+		<title>Center</title>
 		<link rel="stylesheet" href="css/style.css" type="text/css">
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 	</head>
 	<body>
-		
+		<div id="side1" class="side-container center-child">
+			<table class="side1-container center-child">
+					<tr>
+						<td></td>
+						<td onclick="VY1 = VY1 - 0.1;" class="table1-top"></td>
+						<td></td>
+					</tr>
+						<td onclick="VX1 = VX1 - 0.1;" class="table1-left"></td>
+						<td>
+							<div class="crosshair-container">
+								<svg class="crosshair-bkgd-svg">
+									<line x1="250" y1="0" x2="250" y2="500" class="svg-line"/>
+									<line x1="0" y1="250" x2="500" y2="250" class="svg-line"/>
+									<rect x="150" y="150" width="200" height="200" class="svg-rect"/>
+									<rect x="249" y="249" width="2" height="2" class="svg-rect"/>
+								</svg>
+								<div id="crosshair1" class="crosshair"></div>
+							</div>
+						</td>
+						<td onclick="VX1 = VX1 + 0.1;" class="table1-right"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td onclick="VY1 = VY1 + 0.1;" class="table1-bottom"></td>
+						<td></td>
+					</tr>
+			</table>
+		</div>
+		<div id="side2" class="side-container center-child">
+			<table class="side2-container center-child">
+					<tr>
+						<td></td>
+						<td onclick="VY2 = VY2 - 0.1;" class="table2-top"></td>
+						<td></td>
+					</tr>
+						<td onclick="VX2 = VX2 - 0.1;" class="table2-left"></td>
+						<td>
+							<div class="crosshair-container">
+								<svg class="crosshair-bkgd-svg">
+									<line x1="250" y1="0" x2="250" y2="500" class="svg-line"/>
+									<line x1="0" y1="250" x2="500" y2="250" class="svg-line"/>
+									<rect x="150" y="150" width="200" height="200" class="svg-rect"/>
+									<rect x="249" y="249" width="2" height="2" class="svg-rect"/>
+								</svg>
+								<div id="crosshair2" class="crosshair"></div>
+							</div>
+						</td>
+						<td onclick="VX2 = VX2 + 0.1;" class="table2-right"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td onclick="VY2 = VY2 + 0.1;" class="table2-bottom"></td>
+						<td></td>
+					</tr>
+			</table>
+		</div>
+		<script>
+			var VX1 = 0;
+			var VY1 = 0;
+			var VZ1 = 0;
+			var VX2 = 0;
+			var VY2 = 0;
+			var VZ2 = 0;
+			var  X1 = 0;
+			var  Y1 = 0;
+			var  Z1 = 0;
+			var  X2 = 0;
+			var  Y2 = 0;
+			var  Z2 = 0;
+			var y = true;
+			function set (tX, tY, rZ, cross) {
+				if (cross == 1) {
+					document.getElementById("crosshair1").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px) rotateZ("+ rZ+"deg)";
+				} else if (cross == 2) {
+					document.getElementById("crosshair2").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px) rotateZ("+ rZ+"deg)";
+				}
+			}
+			
+			setInterval(function(){
+				if (y) {
+					var x = 0.01;
+					VX1 = VX1 + (Math.random()-1/2)*x;
+					VY1 = VY1 + (Math.random()-1/2)*x;
+					VX2 = VX2 + (Math.random()-1/2)*x;
+					VY2 = VY2 + (Math.random()-1/2)*x;
+					X1 = X1 + VX1;
+					Y1 = Y1 + VY1;
+					X2 = X2 + VX2;
+					Y2 = Y2 + VY2;
+					set(X1,Y1,Z1,1);
+					set(X2,Y2,Z2,2);
+					if (X1>50||X1<-50||Y1>50||Y1<-50||X2>50||X2<-50||Y2>50||Y2<-50) {
+						alert("You Lose!");
+						y = false;
+					}
+				}
+			}, 10);
+		</script>
 	<body>
 </html>

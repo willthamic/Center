@@ -1,0 +1,117 @@
+html, body, table, tr {
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+
+body {
+	display:inline-flex;
+}
+
+:root {
+  --root-size: 1000px;
+ /*
+ calc(var(--root-size) )
+ */
+}
+
+.center-child {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.side-container {
+	height: 100%;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+}
+
+#side1 {
+	background-color: #F55;
+}
+
+#side2 {
+	background-color: #55F;
+}
+
+.side1-container, .side2-container {
+	width: calc(var(--root-size));
+	height: calc(var(--root-size) );
+	background-color: #FF5;
+}
+
+.crosshair-container {
+	width:  calc(var(--root-size)*5/10);
+	height: calc(var(--root-size)*5/10);
+	background-color: #FFF;
+}
+
+.crosshair-bkgd-svg {
+	height: calc(var(--root-size)*5/10);
+	width: calc(var(--root-size)*5/10);
+	position: relative;
+}
+
+.crosshair {
+	width:calc(var(--root-size)*0.92/10);
+	height:calc(var(--root-size)*0.92/10);
+	border:4px solid black;
+	position: relative;
+	margin:auto;
+	margin-top:calc((var(--root-size)*-3/10));
+	transition: all 0.1s;
+}
+
+.svg-line {
+	stroke: black;
+	stroke-width: 4;
+}
+
+.svg-rect {
+	fill: #FFF;
+	stroke-width: 4;
+	stroke: #000; 
+}
+
+td {
+	width:400px;
+	height:400px;
+	padding:0;
+	/*background-color:#CFC*/
+}
+
+.table1-left {
+	background-color:#CFC;
+}
+
+.table1-right {
+	background-color:#CFC;
+}
+
+.table1-top {
+	background-color:#CFC;
+}
+
+.table1-bottom {
+	background-color:#CFC;
+}
+
+.table2-left {
+	background-color:#CFC;
+}
+
+.table2-right {
+	background-color:#CFC;
+}
+
+.table2-top {
+	background-color:#CFC;
+}
+
+.table2-bottom {
+	background-color:#CFC;
+}
