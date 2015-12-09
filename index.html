@@ -66,46 +66,101 @@
 			</table>
 		</div>
 		<script>
-			var VX1 = 0;
-			var VY1 = 0;
-			var VZ1 = 0;
-			var VX2 = 0;
-			var VY2 = 0;
-			var VZ2 = 0;
 			var  X1 = 0;
 			var  Y1 = 0;
-			var  Z1 = 0;
 			var  X2 = 0;
 			var  Y2 = 0;
-			var  Z2 = 0;
-			var y = true;
-			function set (tX, tY, rZ, cross) {
+			var VX1 = 0;
+			var VY1 = 0;
+			var VX2 = 0;
+			var VY2 = 0;
+			var PX1 = 0;
+			var PY1 = 0;
+			var PX2 = 0;
+			var PY2 = 0;
+			var x = 0.001;
+			
+			function set (tX, tY, cross) {
 				if (cross == 1) {
-					document.getElementById("crosshair1").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px) rotateZ("+ rZ+"deg)";
+					document.getElementById("crosshair1").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px)";
 				} else if (cross == 2) {
-					document.getElementById("crosshair2").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px) rotateZ("+ rZ+"deg)";
+					document.getElementById("crosshair2").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px)";
+				}
+			}
+			setInterval(function(){
+				PY2 = getRandom();
+				PX2 = getRandom();
+				PY1 = getRandom();
+				PX1 = getRandom();
+			}, 1000);
+			
+			setInterval(function(){
+				if (PX1 > 0) {
+					VX1 = VX1 - x;
+					PX1 = PX1 - x;
+				}
+				if (PY1 > 0) {
+					VY1 = VY1 - x; 
+					PY1 = PY1 - x;
+				}
+				if (PX2 > 0) {
+					VX2 = VX2 - x; 
+					PX2 = PX2 - x;
+				}
+				if (PY2 > 0) {
+					VY2 = VY2 - x; 
+					PY2 = PY2 - x;
+				}
+				if (PX1 < 0) {
+					VX1 = VX1 - x; 
+					PX1 = PX1 - x;
+				}
+				if (PY1 < 0) {
+					VY1 = VY1 - x; 
+					PY1 = PY1 - x;
+				}
+				if (PX2 < 0) {
+					VX2 = VX2 - x; 
+					PX2 = PX2 - x;
+				}
+				if (PY2 < 0) {
+					VY2 = VY2 - x; 
+					PY2 = PY2 - x;
+				}
+				X1 = X1 + VX1;
+				Y1 = Y1 + VY1;
+				X2 = X2 + VX2;
+				Y2 = Y2 + VY2;
+				set(X1,Y1,1);
+				set(X2,Y2,2);
+				checkStatus(X1,X2,Y1,Y2);
+			}, 10);
+			
+			function checkStatus (X1,X2,Y1,Y2) {
+				if (X1>50||X1<-50||Y1>50||Y1<-50||X2>50||X2<-50||Y2>50||Y2<-50) {
+					alert("You Lose!");
+					reset();
 				}
 			}
 			
-			setInterval(function(){
-				if (y) {
-					var x = 0.01;
-					VX1 = VX1 + (Math.random()-1/2)*x;
-					VY1 = VY1 + (Math.random()-1/2)*x;
-					VX2 = VX2 + (Math.random()-1/2)*x;
-					VY2 = VY2 + (Math.random()-1/2)*x;
-					X1 = X1 + VX1;
-					Y1 = Y1 + VY1;
-					X2 = X2 + VX2;
-					Y2 = Y2 + VY2;
-					set(X1,Y1,Z1,1);
-					set(X2,Y2,Z2,2);
-					if (X1>50||X1<-50||Y1>50||Y1<-50||X2>50||X2<-50||Y2>50||Y2<-50) {
-						alert("You Lose!");
-						y = false;
-					}
-				}
-			}, 10);
+			function getRandom() {
+				return (Math.random()-0.5)*x*2;
+			}
+			
+			function reset () {
+				PX1 = 0;
+				PY1 = 0;
+				PX2 = 0;
+				PY2 = 0;
+				VX1 = 0;
+				VY1 = 0;
+				VX2 = 0;
+				VY2 = 0;
+				X1  = 0;
+				Y1  = 0;
+				X2  = 0;
+				Y2  = 0;
+			}
 		</script>
 	<body>
 </html>
