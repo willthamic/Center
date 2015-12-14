@@ -13,7 +13,7 @@ body {
 :root {
   --root-size: 1000px;
  /*
- calc(var(--root-size) )
+ calc(100px )
  */
 }
 
@@ -39,30 +39,30 @@ body {
 }
 
 .side1-container, .side2-container {
-	width: calc(var(--root-size));
-	height: calc(var(--root-size) );
+	width: calc(1000px);
+	height: calc(1000px );
 	background-color: #FF5;
 }
 
 .crosshair-container {
-	width:  calc(var(--root-size)*5/10);
-	height: calc(var(--root-size)*5/10);
+	width:  calc(1000px * 5 / 10);
+	height: calc(1000px * 5 / 10);
 	background-color: #FFF;
 }
 
 .crosshair-bkgd-svg {
-	height: calc(var(--root-size)*5/10);
-	width: calc(var(--root-size)*5/10);
+	height: calc(1000px * 5 / 10);
+	width: calc(1000px * 5 / 10);
 	position: relative;
 }
 
 .crosshair {
-	width:calc(var(--root-size)*0.92/10);
-	height:calc(var(--root-size)*0.92/10);
+	width:calc(1000px * 0.92 / 10);
+	height:calc(1000px * 0.92 / 10);
 	border:4px solid black;
 	position: relative;
 	margin:auto;
-	margin-top:calc((var(--root-size)*-3/10));
+	margin-top:calc((1000px * -3 / 10));
 	transition: all 0.1s;
 }
 
