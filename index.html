@@ -79,6 +79,7 @@
 			var PX2 = 0;
 			var PY2 = 0;
 			var x = 0.001;
+			var time = 0;
 			
 			function set (tX, tY, cross) {
 				if (cross == 1) {
@@ -96,36 +97,36 @@
 			
 			setInterval(function(){
 				if (PX1 > 0) {
-					VX1 = VX1 - x;
-					PX1 = PX1 - x;
+					VX1 -= x;
+					PX1 -= x;
 				}
 				if (PY1 > 0) {
-					VY1 = VY1 - x; 
-					PY1 = PY1 - x;
+					VY1 -= x; 
+					PY1 -= x;
 				}
 				if (PX2 > 0) {
-					VX2 = VX2 - x; 
-					PX2 = PX2 - x;
+					VX2 -= x; 
+					PX2 -= x;
 				}
 				if (PY2 > 0) {
-					VY2 = VY2 - x; 
-					PY2 = PY2 - x;
+					VY2 -= x; 
+					PY2 -= x;
 				}
 				if (PX1 < 0) {
-					VX1 = VX1 - x; 
-					PX1 = PX1 - x;
+					VX1 += x; 
+					PX1 += x;
 				}
 				if (PY1 < 0) {
-					VY1 = VY1 - x; 
-					PY1 = PY1 - x;
+					VY1 += x; 
+					PY1 += x;
 				}
 				if (PX2 < 0) {
-					VX2 = VX2 - x; 
-					PX2 = PX2 - x;
+					VX2 += x; 
+					PX2 += x;
 				}
 				if (PY2 < 0) {
-					VY2 = VY2 - x; 
-					PY2 = PY2 - x;
+					VY2 += x; 
+					PY2 += x;
 				}
 				X1 = X1 + VX1;
 				Y1 = Y1 + VY1;
@@ -136,15 +137,19 @@
 				checkStatus(X1,X2,Y1,Y2);
 			}, 10);
 			
+			setInterval(function(){
+				time += 0.01;
+			}, 10);
+			
 			function checkStatus (X1,X2,Y1,Y2) {
 				if (X1>50||X1<-50||Y1>50||Y1<-50||X2>50||X2<-50||Y2>50||Y2<-50) {
-					alert("You Lose!");
+					alert("You lasted " + time.toFixed(2) + " seconds.");
 					reset();
 				}
 			}
 			
 			function getRandom() {
-				return (Math.random()-0.5)*x*2;
+				return (Math.random()-0.5)*2;
 			}
 			
 			function reset () {
@@ -160,6 +165,7 @@
 				Y1  = 0;
 				X2  = 0;
 				Y2  = 0;
+				time = 0;
 			}
 		</script>
 	<body>
