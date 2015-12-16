@@ -6,16 +6,17 @@
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
 		<script type="text/javascript" src="js/script.js"></script>
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 	</head>
 	<body>
 		<div id="side1" class="side-container center-child">
 			<table class="side1-container center-child">
 					<tr>
 						<td></td>
-						<td onclick="VY1 = VY1 - 0.1;" class="table1-top"></td>
+						<td onclick="crosshair1.VY -= 0.1;" class="table1-top"></td>
 						<td></td>
 					</tr>
-						<td onclick="VX1 = VX1 - 0.1;" class="table1-left"></td>
+						<td onclick="crosshair1.VX -= 0.1;" class="table1-left"></td>
 						<td>
 							<div class="crosshair-container">
 								<svg class="crosshair-bkgd-svg">
@@ -27,11 +28,11 @@
 								<div id="crosshair1" class="crosshair"></div>
 							</div>
 						</td>
-						<td onclick="VX1 = VX1 + 0.1;" class="table1-right"></td>
+						<td onclick="crosshair1.VX += 0.1;" class="table1-right"></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="VY1 = VY1 + 0.1;" class="table1-bottom"></td>
+						<td onclick="crosshair1.VY += 0.1;" class="table1-bottom"></td>
 						<td></td>
 					</tr>
 			</table>
@@ -40,10 +41,10 @@
 			<table class="side2-container center-child">
 					<tr>
 						<td></td>
-						<td onclick="VY2 = VY2 - 0.1;" class="table2-top"></td>
+						<td onclick="crosshair2.VY -= 0.1;" class="table2-top"></td>
 						<td></td>
 					</tr>
-						<td onclick="VX2 = VX2 - 0.1;" class="table2-left"></td>
+						<td onclick="crosshair2.VX -= 0.1;" class="table2-left"></td>
 						<td>
 							<div class="crosshair-container">
 								<svg class="crosshair-bkgd-svg">
@@ -55,117 +56,30 @@
 								<div id="crosshair2" class="crosshair"></div>
 							</div>
 						</td>
-						<td onclick="VX2 = VX2 + 0.1;" class="table2-right"></td>
+						<td onclick="crosshair2.VX += 0.1;" class="table2-right"></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="VY2 = VY2 + 0.1;" class="table2-bottom"></td>
+						<td onclick="crosshair2.VY += 0.1;" class="table2-bottom"></td>
 						<td></td>
 					</tr>
 			</table>
 		</div>
 		<script>
-			var  X1 = 0;
-			var  Y1 = 0;
-			var  X2 = 0;
-			var  Y2 = 0;
-			var VX1 = 0;
-			var VY1 = 0;
-			var VX2 = 0;
-			var VY2 = 0;
-			var PX1 = 0;
-			var PY1 = 0;
-			var PX2 = 0;
-			var PY2 = 0;
-			var x = 0.001;
+			function Crosshair () {
+				this.CX = 0;
+				this.CY = 0;
+				this.VX = 0;
+				this.VY = 0;
+				this.PX = 0;
+				this.PY = 0;
+			}
+			var crosshair1 = new Crosshair();
+			var crosshair2 = new Crosshair();
 			var time = 0;
-			
-			function set (tX, tY, cross) {
-				if (cross == 1) {
-					document.getElementById("crosshair1").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px)";
-				} else if (cross == 2) {
-					document.getElementById("crosshair2").style.transform = "translateX("+ tX +"px) translateY("+ tY +"px)";
-				}
-			}
-			setInterval(function(){
-				PY2 = getRandom();
-				PX2 = getRandom();
-				PY1 = getRandom();
-				PX1 = getRandom();
-			}, 1000);
-			
-			setInterval(function(){
-				if (PX1 > 0) {
-					VX1 -= x;
-					PX1 -= x;
-				}
-				if (PY1 > 0) {
-					VY1 -= x; 
-					PY1 -= x;
-				}
-				if (PX2 > 0) {
-					VX2 -= x; 
-					PX2 -= x;
-				}
-				if (PY2 > 0) {
-					VY2 -= x; 
-					PY2 -= x;
-				}
-				if (PX1 < 0) {
-					VX1 += x; 
-					PX1 += x;
-				}
-				if (PY1 < 0) {
-					VY1 += x; 
-					PY1 += x;
-				}
-				if (PX2 < 0) {
-					VX2 += x; 
-					PX2 += x;
-				}
-				if (PY2 < 0) {
-					VY2 += x; 
-					PY2 += x;
-				}
-				X1 = X1 + VX1;
-				Y1 = Y1 + VY1;
-				X2 = X2 + VX2;
-				Y2 = Y2 + VY2;
-				set(X1,Y1,1);
-				set(X2,Y2,2);
-				checkStatus(X1,X2,Y1,Y2);
-			}, 10);
-			
-			setInterval(function(){
-				time += 0.01;
-			}, 10);
-			
-			function checkStatus (X1,X2,Y1,Y2) {
-				if (X1>50||X1<-50||Y1>50||Y1<-50||X2>50||X2<-50||Y2>50||Y2<-50) {
-					alert("You lasted " + time.toFixed(2) + " seconds.");
-					reset();
-				}
-			}
-			
-			function getRandom() {
-				return (Math.random()-0.5)*2;
-			}
-			
-			function reset () {
-				PX1 = 0;
-				PY1 = 0;
-				PX2 = 0;
-				PY2 = 0;
-				VX1 = 0;
-				VY1 = 0;
-				VX2 = 0;
-				VY2 = 0;
-				X1  = 0;
-				Y1  = 0;
-				X2  = 0;
-				Y2  = 0;
-				time = 0;
-			}
+			checkStorage();
+			setInterval(randVel, 1000);
+			setInterval(tick, 10);
 		</script>
 	<body>
 </html>
